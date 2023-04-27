@@ -37,7 +37,7 @@ Le projet Minishell de l'école 42 consiste en la création d'un programme de sh
    ```
    git clone https://github.com/Jalevesq/Minishell
    ```
-2. Compiler le programme (le Makefile télécharge automatiquement la librairie Readline nécessaire pour le bon fonctionnement du programme) :
+2. Compiler le programme (avec l'aide de curl, le Makefile télécharge automatiquement la librairie Readline nécessaire pour le bon fonctionnement du programme) :
    ```
    make
    ```
@@ -88,6 +88,15 @@ pid = (pid_t *)malloc(sizeof(pid_t) * (child->pipe_nbr + 1));
 ```
 - Ensuite, toujours dans la fonction ft_command, si des pipes sont présents, un tableau de pipes est défini pour être utilisé dans les processus enfants. Vous pouvez trouver plus d'informations sur le fonctionnement de ce tableau de pipes dans le code source, en particulier dans les fichiers executor.c et exec_utils.c.
 
-- Lorsque tout est initialisé, la fonction ft_exec_command est appelé. Cette fonction va itérer à travers la liste chaîné et lancer un child process lorsque la variable i est égale à 0 ou lorsque que le type de la node est égale à "PIPE". Pour les redirections, chaque "groupe de commande" est analysé de gauche à droite. Pour le STDOUT, si il y a une redirection, Dup2 sera effectué qu'une seule fois sur la redirection (>) le plus à droite ou sur le pipe si aucun ">". Pour le STDIN,
+- Lorsque tout est initialisé, la fonction ft_exec_command est appelé. Cette fonction va itérer à travers la liste chaîné et lancer un child process lorsque la variable i est égale à 0 ou lorsque que le type de la node est égale à "PIPE". Pour les redirections, chaque "groupe de commande" est analysé de gauche à droite.
+- Pour le STDOUT, si il y a une/des redirection(s), Dup2 sera effectué qu'une seule fois sur la redirection (>) le plus à droite (ou sur le pipe si aucun ">").
+- Pour le STDIN, encore une fois si il y a une/des redirection(s), Dup2 sera aussi effectué sur la redirection (<) le plus à droite (ou sur le pipe si aucun "<").
+- Quand toutes les redirections sont effectués, il ne reste plus qu'a exécuter la commande et le résultat apparait !
+
+  <img width="503" alt="Screen Shot 2023-04-27 at 12 10 18 PM" src="https://user-images.githubusercontent.com/103976653/234922786-8c62305d-0362-47ad-a293-da5e2b42a59a.png">
+#### Builtins
+- Le fonctionnement des builtins n'est pas très compliqué. avant de créer un child process, le programme vérifie si c'est un builtin. Si ce l'est, le PATH ne sera pas recherché dans la variable d'environnement et sera directement exécuté. Dépendemment des builtins (voir bash), certains ne s'exécutent pas lorsqu'il y a plus d'une commande dans le input. C'est pourquoi si l'on fait `ls | exit` le programme ne quittera pas.
+
+  <img width="255" alt="Screen Shot 2023-04-27 at 12 20 09 PM" src="https://user-images.githubusercontent.com/103976653/234926819-63c01e5e-9746-43f8-b3d9-f8b80aa030a4.png">
 ## Conclusion
 Minishell est un projet intéressant pour se familiariser avec la programmation en C et la manipulation de processus. Il est également utile pour comprendre le fonctionnement d'un shell et les fonctionnalités de base telles que l'environnement système, les redirections et les pipes.
