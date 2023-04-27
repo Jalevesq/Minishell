@@ -6,7 +6,7 @@
 #    By: jalevesq <jalevesq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/30 09:17:42 by jalevesq          #+#    #+#              #
-#    Updated: 2023/04/27 09:45:21 by jalevesq         ###   ########.fr        #
+#    Updated: 2023/04/27 10:37:12 by jalevesq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,6 @@ clean:
 	cd include/ && rm -rf readline
 
 fclean:		clean
-	rm -f $(NAME) $(NAME_BONUS)
+	rm -f $(NAME)
 
 re:		fclean all
