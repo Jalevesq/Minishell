@@ -8,7 +8,7 @@ Le projet Minishell de l'école 42 consiste en la création d'un programme de sh
 
 ## Répartition des tâches
 
-- Parsing : réalisé par mon coéquipier Ethan Pasquier
+- Parsing : réalisé par mon coéquipier [Ethan Pasquier](https://github.com/EthanPasquier)
 - Exécuteur & Builtins: réalisé par moi-même
 
 ## Fonctionnalités
@@ -49,10 +49,45 @@ Le projet Minishell de l'école 42 consiste en la création d'un programme de sh
 4. Utiliser le shell en tapant des commandes standard ou en utilisant les fonctionnalités spécifiques.
 ## Fonctionnement
 Le programme se décompose en plusieurs fichiers source :
-1. `main.c` : contient la boucle principale du programme qui gère la saisie, l'exécution et l'affichage des résultats.
-2. `parsing.c` : contient les fonctions qui traitent les commandes saisies par l'utilisateur et les séparent en arguments, redirections, pipes, etc.
-3. `execution.c` : contient les fonctions qui exécutent les commandes et gèrent les redirections, les pipes et les signaux.
-4. `builtins.c` : contient les fonctions qui gèrent les commandes spécifiques au shell (comme `cd`, `env`, `echo`, etc.).
-5. `signals.c` : contient les fonctions qui gèrent les signaux.
+
+```
+.
+├── include
+├── libft
+├── srcs
+│   ├── built
+│   ├── exec
+│   ├── main
+│   ├── parsing
+│   └── tools
+└── Makefile 
+```
+
+### Parsing
+Réalisé par [@EthanPasquier](https://github.com/EthanPasquier)
+- ....
+### Exécuteur
+Réalisé par [@Jalevesq](https://github.com/Jalevesq)
+
+L'exécuteur (ft_executor) reçoit une liste chaînée contenant toutes les informations nécessaires pour l'exécution. Chaque nœud de la liste contient une chaîne de caractères et un entier qui définit le type de nœud (voir parsing).
+
+En utilisant cette liste, plusieurs variables sont initialisées, telles que le nombre de pipes, le nombre de processus enfants, le chemin d'accès des commandes, etc. Ces variables sont définies dans la fonction ft_command.
+
+- Après l'initialisation des variables, le programme prépare le nombre de child process et le nombre de pipe qu'il y a.
+Au départ, le nombre de processus enfants était défini par le nombre de commandes. 
+```
+pid = (pid_t *)malloc(sizeof(pid_t) * (child->cmd_nbr));
+```
+- Cependant, j'ai réalisé que lorsque l'entrée ne contenait pas de commandes:
+```
+> abc
+```
+Elle devait être exécutée dans un processus enfant car les fonctions de redirection sont dans les fonctions de processus enfant. J'ai donc modifié le code pour que le nombre de processus enfants soit égal au nombre de pipes plus un (+1 pour quand il n'y a pas de pipe).
+```
+pid = (pid_t *)malloc(sizeof(pid_t) * (child->pipe_nbr + 1));
+```
+- Ensuite, toujours dans la fonction ft_command, si des pipes sont présents, un tableau de pipes est défini pour être utilisé dans les processus enfants. Vous pouvez trouver plus d'informations sur le fonctionnement de ce tableau de pipes dans le code source, en particulier dans les fichiers executor.c et exec_utils.c.
+
+- Lorsque tout est initialisé, la fonction ft_exec_command est appelé. Cette fonction va itérer à travers la liste chaîné et lancer un child process lorsque la variable i est égale à 0 ou lorsque que le type de la node est égale à "PIPE". Pour les redirections, chaque "groupe de commande" est analysé de gauche à droite. Pour le STDOUT, si il y a une redirection, Dup2 sera effectué qu'une seule fois sur la redirection (>) le plus à droite ou sur le pipe si aucun ">". Pour le STDIN,
 ## Conclusion
 Minishell est un projet intéressant pour se familiariser avec la programmation en C et la manipulation de processus. Il est également utile pour comprendre le fonctionnement d'un shell et les fonctionnalités de base telles que l'environnement système, les redirections et les pipes.
