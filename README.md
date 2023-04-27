@@ -1,6 +1,6 @@
 # Minishell
 
-Le repo actuel contient un README en anglais, mais une version française est disponible sur le repo original, situé sur le compte GitHub de mon coéquipier : https://github.com/EthanPasquier/minishell.
+Le dépôt actuel comprend le fichier README de l'exécuteur. Si vous souhaitez obtenir des informations sur le parsing, je vous recommande de consulter le compte GitHub de mon coéquipier, accessible via ce lien : https://github.com/EthanPasquier/minishell.
 
 ## Introduction
 
@@ -65,7 +65,7 @@ Le programme se décompose en plusieurs fichiers source :
 
 ### Parsing
 Réalisé par [@EthanPasquier](https://github.com/EthanPasquier)
-- ....
+- [Parsing](https://github.com/EthanPasquier/minishell)
 ### Exécuteur
 Réalisé par [@Jalevesq](https://github.com/Jalevesq)
 
