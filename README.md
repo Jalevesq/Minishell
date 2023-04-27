@@ -91,7 +91,7 @@ pid = (pid_t *)malloc(sizeof(pid_t) * (child->pipe_nbr + 1));
 - Lorsque tout est initialisé, la fonction ft_exec_command est appelé. Cette fonction va itérer à travers la liste chaîné et lancer un child process lorsque la variable i est égale à 0 ou lorsque que le type de la node est égale à "PIPE". Pour les redirections, chaque "groupe de commande" est analysé de gauche à droite.
 - Pour le STDOUT, si il y a une/des redirection(s), Dup2 sera effectué qu'une seule fois sur la redirection (>) le plus à droite (ou sur le pipe si aucun ">").
 - Pour le STDIN, encore une fois si il y a une/des redirection(s), Dup2 sera aussi effectué sur la redirection (<) le plus à droite (ou sur le pipe si aucun "<").
-- Quand toutes les redirections sont effectués, il ne reste plus qu'a exécuter la commande et le résultat apparait !
+- Quand toutes les redirections sont effectués, il ne reste plus qu'a exécuter la commande et le résultat apparait!
 
   <img width="503" alt="Screen Shot 2023-04-27 at 12 10 18 PM" src="https://user-images.githubusercontent.com/103976653/234922786-8c62305d-0362-47ad-a293-da5e2b42a59a.png">
 #### Builtins
