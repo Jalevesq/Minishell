@@ -95,7 +95,7 @@ pid = (pid_t *)malloc(sizeof(pid_t) * (child->pipe_nbr + 1));
 
   <img width="503" alt="Screen Shot 2023-04-27 at 12 10 18 PM" src="https://user-images.githubusercontent.com/103976653/234922786-8c62305d-0362-47ad-a293-da5e2b42a59a.png">
 #### Builtins
-- Le mécanisme des fonctions intégrées (builtins) est relativement simple. Avant de créer un processus enfant, le programme vérifie s'il s'agit d'une fonction intégrée. Si c'est le cas, le chemin d'accès (PATH) ne sera pas recherché dans la variable d'environnement et la fonction sera exécutée directement. Cependant, selon les fonctions intégrées (comme dans bash), certaines ne fonctionneront pas si plusieurs commandes sont entrées en même temps. C'est pourquoi si l'on tape `ls | exit`, le programme ne se terminera pas.
+- Le mécanisme des fonctions intégrées (builtins) est relativement simple. Avant de créer un processus enfant, le programme vérifie s'il s'agit d'une fonction intégrée. Si c'est le cas, le chemin d'accès (PATH) ne sera pas recherché dans la variable d'environnement et la fonction sera exécutée directement. Cependant, selon les fonctions intégrées (comme dans bash), certaines ne fonctionneront pas (visuellement) si plusieurs commandes sont entrées en même temps. Si l'on tape `ls | exit`, le programme ne se terminera pas car c'est le child process qui sera exit.
 
   <img width="255" alt="Screen Shot 2023-04-27 at 12 20 09 PM" src="https://user-images.githubusercontent.com/103976653/234926819-63c01e5e-9746-43f8-b3d9-f8b80aa030a4.png">
 ## Conclusion
