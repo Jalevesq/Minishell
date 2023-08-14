@@ -69,4 +69,4 @@ Réalisé par [@EthanPasquier](https://github.com/EthanPasquier)
 ### Exécuteur
 Réalisé par [@Jalevesq](https://github.com/Jalevesq)
 
-Ceci est mon tout premier gros projet en C (et en programmation). Si je devais le refaire, il y aurait certainement des ajustements à faire, notamment au niveau des fonctions intégrées (builtins) et de la gestion des heredocs. L'expérience forge la progression !
+Ceci est mon tout premier gros projet en C. Si je devais le refaire, il y aurait certainement des ajustements à faire, notamment au niveau des fonctions intégrées (builtins) et de la gestion des heredocs. L'expérience forge la progression !
